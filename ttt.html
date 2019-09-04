@@ -81,7 +81,7 @@ sortByCol(arra, 1);
 if(game==true){
 attack2();
 }
-if((document.getElementById("11").style.background == "pink" &&
+ifas: if((document.getElementById("11").style.background == "pink" &&
 document.getElementById("12").style.background == "pink" &&
 document.getElementById("13").style.background == "pink") ||
 (document.getElementById("21").style.background == "pink" &&
@@ -109,6 +109,7 @@ document.getElementById("tekstas").innerHTML = "Laimėjo raudonieji!";
 setTimeout(blank, 7000);
 setTimeout(isNaujo,7000);
 game = false;
+break ifas;
 }
 if((document.getElementById("11").style.background == "yellow" &&
 document.getElementById("12").style.background == "yellow" &&
@@ -138,6 +139,7 @@ document.getElementById("tekstas").innerHTML = "Laimėjo geltonieji!";
 setTimeout(blank, 7000);
 setTimeout(isNaujo, 7000);
 game = false;
+break ifas;
 }
 if((document.getElementById("11").style.background === "pink" ||
 document.getElementById("11").style.background === "yellow") &&
@@ -161,6 +163,7 @@ document.getElementById("tekstas").innerHTML = "Lygiosios!";
 setTimeout(blank, 7000);
 setTimeout(isNaujo, 7000);
 game = false;
+break ifas;
 }
 
 
