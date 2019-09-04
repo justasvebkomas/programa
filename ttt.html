@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>TicTacToe RED&YELLOW</title>
+</head>
+<style>
+p{
+font: Arial;
+font-size: 12px;
+background: black;
+color: white;
+font-weight: bold;
+}
+h1{
+}
+div{
+height: 100px;
+width:100px;
+padding: 20px;
+margin: 20px;
+background: grey;
+border-color: pink;
+}
+</style>
+<body>
+<h1>TIC TAC TOE RED&YELLOW EDITION</h1>
+<p id="tekstas"></p>
+<table>
+  <tr>
+    <th><div id="11"></div></th>
+    <th><div id="12"></div></th>
+    <th><div id="13"></div></th>
+  </tr>
+  <tr>
+    <td><div id="21"></div></td>
+    <td><div id="22"></div></td>
+    <td><div id="23"></div></td>
+  </tr>
+  <tr>
+    <td><div id="31"></div></td>
+    <td><div id="32"></div></td>
+    <td><div id="33"></div></td>
+  </tr>
+</table>
+<script>
+let game = true;
+board = [[0, 0, 0],
+             [0, 0, 0],
+             [0, 0, 0]];
+let sumaEile1;
+let sumaEile2;
+let sumaEile3;
+let sumaStulpelis1;
+let sumaStulpelis2;
+let sumaStulpelis3;
+let sumaIstrizaine1;
+let sumaIstrizaine2;
+let arra;
+taskai();
+
+document.getElementById("11").addEventListener("click", ejimas);
+document.getElementById("12").addEventListener("click", ejimas);
+document.getElementById("13").addEventListener("click", ejimas);
+document.getElementById("21").addEventListener("click", ejimas);
+document.getElementById("22").addEventListener("click", ejimas);
+document.getElementById("23").addEventListener("click", ejimas);
+document.getElementById("31").addEventListener("click", ejimas);
+document.getElementById("32").addEventListener("click", ejimas);
+document.getElementById("33").addEventListener("click", ejimas);
+function ejimas(event){
+let ids = event.target.id;
+document.getElementById(ids).style.background = "pink";
+let digit1 = ids.toString()[0];
+let digit2 = ids.toString()[1];
+board[parseInt(digit1)-1][parseInt(digit2)-1] = -1;
+
+document.getElementById(ids).removeEventListener("click", ejimas, false);
+
+taskai();
+sortByCol(arra, 1);
+if(game==true){
+attack2();
+}
+if((document.getElementById("11").style.background == "pink" &&
+document.getElementById("12").style.background == "pink" &&
+document.getElementById("13").style.background == "pink") ||
+(document.getElementById("21").style.background == "pink" &&
+document.getElementById("22").style.background == "pink" &&
+document.getElementById("23").style.background == "pink") ||
+(document.getElementById("31").style.background == "pink" &&
+document.getElementById("32").style.background == "pink" &&
+document.getElementById("33").style.background == "pink") ||
+(document.getElementById("11").style.background == "pink" &&
+document.getElementById("21").style.background == "pink" &&
+document.getElementById("31").style.background == "pink") ||
+(document.getElementById("12").style.background == "pink" &&
+document.getElementById("22").style.background == "pink" &&
+document.getElementById("32").style.background == "pink") ||
+(document.getElementById("13").style.background == "pink" &&
+document.getElementById("23").style.background == "pink" &&
+document.getElementById("33").style.background == "pink") ||
+(document.getElementById("11").style.background == "pink" &&
+document.getElementById("22").style.background == "pink" &&
+document.getElementById("33").style.background == "pink") ||
+(document.getElementById("13").style.background == "pink" &&
+document.getElementById("22").style.background == "pink" &&
+document.getElementById("31").style.background == "pink")){
+document.getElementById("tekstas").innerHTML = "Laimėjo raudonieji!";
+setTimeout(blank, 7000);
+setTimeout(isNaujo,7000);
+game = false;
+}
+if((document.getElementById("11").style.background == "yellow" &&
+document.getElementById("12").style.background == "yellow" &&
+document.getElementById("13").style.background == "yellow") ||
+(document.getElementById("21").style.background == "yellow" &&
+document.getElementById("22").style.background == "yellow" &&
+document.getElementById("23").style.background == "yellow") ||
+(document.getElementById("31").style.background == "yellow" &&
+document.getElementById("32").style.background == "yellow" &&
+document.getElementById("33").style.background == "yellow") ||
+(document.getElementById("11").style.background == "yellow" &&
+document.getElementById("21").style.background == "yellow" &&
+document.getElementById("31").style.background == "yellow") ||
+(document.getElementById("12").style.background == "yellow" &&
+document.getElementById("22").style.background == "yellow" &&
+document.getElementById("32").style.background == "yellow") ||
+(document.getElementById("13").style.background == "yellow" &&
+document.getElementById("23").style.background == "yellow" &&
+document.getElementById("33").style.background == "yellow") ||
+(document.getElementById("11").style.background == "yellow" &&
+document.getElementById("22").style.background == "yellow" &&
+document.getElementById("33").style.background == "yellow") ||
+(document.getElementById("13").style.background == "yellow" &&
+document.getElementById("22").style.background == "yellow" &&
+document.getElementById("31").style.background == "yellow")){
+document.getElementById("tekstas").innerHTML = "Laimėjo geltonieji!";
+setTimeout(blank, 7000);
+setTimeout(isNaujo, 7000);
+game = false;
+}
+if((document.getElementById("11").style.background === "pink" ||
+document.getElementById("11").style.background === "yellow") &&
+(document.getElementById("12").style.background === "pink" ||
+document.getElementById("12").style.background === "yellow") &&
+(document.getElementById("13").style.background === "pink" ||
+document.getElementById("13").style.background === "yellow") && 
+(document.getElementById("21").style.background === "pink" ||
+document.getElementById("21").style.background === "yellow") &&
+(document.getElementById("22").style.background === "pink" ||
+document.getElementById("22").style.background === "yellow") &&
+(document.getElementById("23").style.background === "pink" ||
+document.getElementById("23").style.background === "yellow") &&
+(document.getElementById("31").style.background === "pink" ||
+document.getElementById("31").style.background === "yellow") &&
+(document.getElementById("32").style.background === "pink" ||
+document.getElementById("32").style.background === "yellow") &&
+(document.getElementById("33").style.background === "pink" ||
+document.getElementById("33").style.background === "yellow")){
+document.getElementById("tekstas").innerHTML = "Lygiosios!";
+setTimeout(blank, 7000);
+setTimeout(isNaujo, 7000);
+game = false;
+}
+
+
+}
+function isNaujo(){
+game=true;
+for(let x=1;x<=3;x++){
+let xs = x.toString();
+for(let y=1;y<=3;y++){
+let ys = y.toString();
+document.getElementById(xs+ys).addEventListener("click", ejimas);
+document.getElementById(xs+ys).style.background = "grey";
+}
+}
+board = [[0, 0, 0],
+         [0, 0, 0],
+         [0, 0, 0]];
+
+}
+
+function taskai(){
+sumaEile1 = board[0][0]+board[0][1]+board[0][2];
+sumaEile2 = board[1][0]+board[1][1]+board[1][2];
+sumaEile3 = board[2][0]+board[2][1]+board[2][2];
+sumaStulpelis1 = board[0][0]+board[1][0]+board[2][0];
+sumaStulpelis2 = board[0][1]+board[1][1]+board[2][1];
+sumaStulpelis3 = board[0][2]+board[1][2]+board[2][2];
+sumaIstrizaine1 = board[0][0]+board[1][1]+board[2][2];
+sumaIstrizaine2 = board[2][0]+board[1][1]+board[0][2];
+arra = [["sumaEile1", sumaEile1], ["sumaEile2", sumaEile2], ["sumaEile3", sumaEile3], ["sumaStulpelis1", sumaStulpelis1], ["sumaStulpelis2", sumaStulpelis2], ["sumaStulpelis3", sumaStulpelis3], ["sumaIstrizaine1", sumaIstrizaine1], ["sumaIstrizaine2", sumaIstrizaine2]];
+
+}
+function sortByCol(arr, colIndex){
+    arr.sort(sortFunction)
+    function sortFunction(arra, b) {
+        arra = arra[colIndex]
+        b = b[colIndex]
+        return (arra === b) ? 0 : (arra < b) ? -1 : 1
+    }
+}
+
+function blank(){
+document.getElementById("tekstas").innerHTML = ""
+}
+
+function attack2(){
+
+
+
+
+
+
+
+if(arra[0][0] == "sumaEile1"){
+if(board[0][0]==0 || board[0][1]==0 || board[0][2]==0){
+let status = true;
+do{
+let skai = Math.floor(Math.random() * 3);
+if(board[0][skai] == 0){
+let skaiP = skai + 1;
+let idss = "1" + skaiP;
+document.getElementById(idss).style.background = "yellow";
+document.getElementById(idss).removeEventListener("click", ejimas, false);
+board[0][skai] = 1;
+status = false;
+}
+}while(status == true);
+}else{randomShot();
+}
+}
+
+if(arra[0][0]=="sumaEile2"){
+if(board[1][0]==0 || board[1][1]==0 || board[1][2]==0){
+let status = true;
+do{
+let skai = Math.floor(Math.random() * 3);
+if(board[1][skai] == 0){
+let skaiP = skai + 1;
+let idss = "2" + skaiP;
+document.getElementById(idss).style.background = "yellow";
+document.getElementById(idss).removeEventListener("click", ejimas, false);
+
+board[1][skai] = 1;
+status = false;
+
+}
+}while(status == true);
+}else{
+randomShot();
+}
+}
+
+
+
+
+
+if(arra[0][0]=="sumaEile3"){
+if(board[2][0]==0 || board[2][1]==0 || board[2][2]==0){
+let status = true;
+do{
+let skai = Math.floor(Math.random() * 3);
+if(board[2][skai] == 0){
+let skaiP = skai +1;
+let idss = "3" + skaiP;
+document.getElementById(idss).style.background = "yellow";
+document.getElementById(idss).removeEventListener("click", ejimas, false);
+board[2][skai] = 1;
+status = false;
+
+}
+}while(status == true);
+}else{
+randomShot();
+}
+}
+
+
+
+if(arra[0][0]=="sumaStulpelis1"){
+if(board[0][0]==0 || board[1][0]==0 || board[2][0]==0){
+let status = true;
+do{
+let skai = Math.floor(Math.random() * 3);
+if(board[skai][0] == 0){
+let skaiP = skai +1;
+let idss = skaiP + "1";
+document.getElementById(idss).style.background = "yellow";
+document.getElementById(idss).removeEventListener("click", ejimas, false);
+board[skai][0] = 1;
+status = false;
+
+}
+}while(status == true);
+}else{
+randomShot();
+}
+}
+
+
+if(arra[0][0]=="sumaStulpelis2"){
+if(board[0][1]==0 || board[1][1]==0 || board[2][1]==0){
+let status = true;
+do{
+let skai = Math.floor(Math.random() * 3);
+if(board[skai][1] == 0){
+let skaiP = skai +1;
+let idss = skaiP + "2";
+document.getElementById(idss).style.background = "yellow";
+document.getElementById(idss).removeEventListener("click", ejimas, false);
+board[skai][1] = 1;
+status = false;
+
+}
+}while(status == true);
+}else{
+randomShot();
+}
+}
+
+
+if(arra[0][0]=="sumaStulpelis3"){
+if(board[0][2]==0 || board[1][2]==0 || board[2][2]==0){
+let status = true;
+do{
+let skai = Math.floor(Math.random() * 3);
+if(board[skai][2] == 0){
+let skaiP = skai +1;
+let idss = skaiP + "3";
+document.getElementById(idss).style.background = "yellow";
+document.getElementById(idss).removeEventListener("click", ejimas, false);
+board[skai][2] = 1;
+status = false;
+
+}
+}while(status == true);
+}else{
+randomShot();
+}
+}
+
+
+if(arra[0][0]=="sumaIstrizaine1"){
+if(board[0][0]==0 || board[1][1]==0 || board[2][2]==0){
+let status = true;
+do{
+let skai = Math.floor(Math.random() * 3);
+if(board[skai][skai] == 0){
+let skaiP = skai +1;
+let idss = skaiP+''+skaiP;
+document.getElementById(parseInt(idss)).style.background = "yellow";
+document.getElementById(parseInt(idss)).removeEventListener("click", ejimas, false);
+board[skai][skai] = 1;
+status = false;
+
+}
+}while(status == true);
+}else{
+randomShot();
+}
+}
+
+
+if(arra[0][0]=="sumaIstrizaine2"){
+if(board[0][2]==0 || board[1][1]==0 || board[2][0]==0){
+let items = [31, 22, 13];
+let stat = true;
+do{
+let item = items[Math.floor(Math.random()*items.length)];
+let digit1 = parseInt(item.toString()[0]);
+let digit2 = parseInt(item.toString()[1]);
+if(board[digit1-1][digit2-1] == 0){
+document.getElementById(item).style.background = "yellow";
+document.getElementById(item).removeEventListener("click", ejimas, false);
+board[digit1-1][digit2-1] = 1;
+stat = false;
+
+}
+}while(stat == true);
+}else{
+randomShot();
+}
+}
+}
+function randomShot(){
+let statusX = true;
+do{
+let s1 = Math.floor(Math.random() * 3);
+let s2 = Math.floor(Math.random() * 3);
+if(board[s1][s2]==0){
+document.getElementById(s1+""+s2).style.background = "yellow";
+document.getElementById(s1+""+s2).removeEventListener("click", ejimas, false);
+board[digit1-1][digit2-1] = 1;
+statusX = false;
+}
+}while(statusX == false);
+}
+
+
+
+</script>
+</body>
+</html>
