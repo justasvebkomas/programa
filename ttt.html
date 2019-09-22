@@ -23,7 +23,7 @@ border-color: pink;
 }
 </style>
 <body>
-<h1>TIC TAC TOE RED&YELLOW EDITION</h1>
+<h1>TIC TAC TOE RED&YELLOW</h1>
 <p id="tekstas"></p>
 <table>
   <tr>
@@ -109,9 +109,9 @@ document.getElementById("tekstas").innerHTML = "Laimėjo raudonieji!";
 setTimeout(blank, 7000);
 setTimeout(isNaujo,7000);
 game = false;
-break ifas;
+ break ifas;
 }
-if((document.getElementById("11").style.background == "yellow" &&
+else if((document.getElementById("11").style.background == "yellow" &&
 document.getElementById("12").style.background == "yellow" &&
 document.getElementById("13").style.background == "yellow") ||
 (document.getElementById("21").style.background == "yellow" &&
@@ -139,9 +139,9 @@ document.getElementById("tekstas").innerHTML = "Laimėjo geltonieji!";
 setTimeout(blank, 7000);
 setTimeout(isNaujo, 7000);
 game = false;
-break ifas;
+ break ifas;
 }
-if((document.getElementById("11").style.background === "pink" ||
+else if((document.getElementById("11").style.background === "pink" ||
 document.getElementById("11").style.background === "yellow") &&
 (document.getElementById("12").style.background === "pink" ||
 document.getElementById("12").style.background === "yellow") &&
